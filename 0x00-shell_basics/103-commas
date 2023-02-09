@@ -1,0 +1,3 @@
+#!/bin/bash
+ls -A | tr '\n' ',' sort -k1.1,1 tr ',' '\n'
+
