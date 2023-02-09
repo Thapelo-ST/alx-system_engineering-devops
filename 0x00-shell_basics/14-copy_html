@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -l /tmp/file_*.html
+cp *.html ..
