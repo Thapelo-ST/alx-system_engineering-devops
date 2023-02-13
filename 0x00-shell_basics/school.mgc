@@ -1,2 +1,2 @@
 #!/bin/bash
-file ?.SCHOOL School
+file -m school.mgc *.SCHOOL
