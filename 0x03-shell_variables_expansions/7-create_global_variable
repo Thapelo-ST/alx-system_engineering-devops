@@ -1,2 +1,2 @@
 #!/bin/bash 
-sudo sh -c 'echo "BEST=School" >> /etc/environment'
+export BEST='School'
