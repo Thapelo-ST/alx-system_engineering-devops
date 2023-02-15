@@ -1,2 +1,2 @@
 #!/bin/bash
-decimal=$DECIMAL | hex=$(echo "obase=16; $decimal" | bc) |echo $hex
+echo "obase=16; ${DECIMAL}" | bc 
