@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# the script displays pid along with proccess name called bash without using ps
+
+# getting list of directories
+process_of_directories=(/proc/[0-9]*)
+# extracting PID and proccess name
+for dir in "${process_of_directories[@]}"; do
+	pid=$(basename "$dir")
+	proccess_name=$(cat "$dir/comm")
+# check if the proccess has the word bash then print
+	if [[ "$proccess_name" == *"bash" ]]; then
+		echo "$pid $proccess_name"
+	fi
+done

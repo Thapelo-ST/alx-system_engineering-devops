@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# prints "To infinity and beyond" until signal killer and has a sleep or 2 seconds
+
+# Signal killer
+signal_exit()
+{
+	echo "Terminated"
+	exit 0
+}
+# handle SIGINT and SIGSTP signals
+trap signal_exit SIGTERM
+
+# iteration to print
+while true; do
+	echo "To infinity and beyond"
+	sleep 2
+done

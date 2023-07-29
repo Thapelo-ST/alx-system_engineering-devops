@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# kills running proccesses
+
+# find PID for to infinity and beyond proccess
+proccess=$(pgrep -f "4-to_infinity_and_beyond")
+
+# kill proccess
+if [[ -n "$proccess" ]]; then
+	kill "$proccess"
+fi

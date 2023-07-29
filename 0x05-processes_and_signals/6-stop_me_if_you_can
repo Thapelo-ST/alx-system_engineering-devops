@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# find the PROCCESS
+proccess=$(pgrep -f "4-to_infinity_and_beyond")
+
+# Check if the process is running
+if [[ -n "$proccess" ]]; then
+    # Send a SIGTERM signal to the process using the signal number (15)
+    kill -15 "$proccess"
+fi
