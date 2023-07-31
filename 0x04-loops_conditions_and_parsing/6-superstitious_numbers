@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# This script is displaying messeges in superstitious numbers
+i=0
+
+while [ "$i" -le 20 ]; do
+    case "$i" in
+        4)
+            echo "$i bad luck from China"
+            ;;
+        9)
+            echo "$i bad luck from Japan"
+            ;;
+        17)
+            echo "$i bad luck from Italy"
+            ;;
+        *)
+            echo "$i"
+            ;;
+    esac
+    ((i++))
+done
