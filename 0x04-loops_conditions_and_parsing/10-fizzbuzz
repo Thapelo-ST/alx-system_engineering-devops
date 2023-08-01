@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# This script prints numbers case fizzbuzz on multiples of 3 and 5 but fizz case of multiples of 3 and buzz case multiples of 5
+
+n=1
+
+while [ "$n" -le 100 ]; do
+        if [ $((n%3)) -eq 0 ]  &&  [ $((n%5)) -eq 0 ]; then
+                    echo "FizzBuzz"
+        elif [ $((n%3)) -eq 0 ]; then
+                    echo "Fizz"
+        elif [ $((n%5)) -eq 0 ]; then
+                    echo "Buzz"
+        else
+                echo "$n"
+        fi
+        ((n++))
+done

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# This script prints all the files in the current directory in a list format
+
+for file in *; do
+	# checking if file is hidden or not
+	if [[ ! "$file" =~ ^\.. ]]; then
+		# make remove delim from first dash
+		after_delim=$(echo "$file" | cut -d'-' -f2-)
+		echo "$after_delim"
+	fi
+done

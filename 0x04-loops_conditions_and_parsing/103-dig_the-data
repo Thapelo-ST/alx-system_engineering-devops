@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# This script sorts the data got from the parsed apache logs
+
+log="apache-access.log"
+
+if [ ! -f "$log" ]; then
+        echo "The file $log does not exist"
+        exit 1
+fi
+awk '{ c[$1" "$9]++ } END { for (entry in c) print c[entry], entry }' "$log" | sort -nr

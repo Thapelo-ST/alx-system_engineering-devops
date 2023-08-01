@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# This script prints details about the username, id and home directory of the user
+file="/etc/passwd"
+
+if [ -f "$file" ]; then
+    # Read the file using a while loop
+    while IFS=":" read -r username _ userid _ homedir _; do
+        echo "Username: $username"
+        echo "User ID: $userid"
+        echo "Home Directory: $homedir"
+    done < "$file"
+else
+    echo "The file $file does not exist."
+fi
