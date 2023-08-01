@@ -2,19 +2,18 @@
 
 # importing Oniguruma lib
 #require 'oniguruma'
-require 'oniguruma'
 
 def match_school(input)
   # insert delim to be found
-  pattern = /school/
+  pattern = /School/
 
   # match using oniguruma lib
   matches = input.scan(pattern)
 
   if matches.empty?
-    puts "No matches found"
+    puts ""
   else
-    puts "#{matches.join(', ')}"
+    puts "#{matches.join('')}"
   end
 end
 
