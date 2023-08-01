@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-def match_school(input)
+def match(input)
   # insert delim to be found
   pattern = /^h(b{0,1})tn/
 
@@ -17,7 +17,7 @@ end
 
 # validate the arguments
 if ARGV.length != 1
-  puts "Ussage: ruby match_school.rb <input text>"
+  puts "Ussage: ruby file <input text>"
 else
-  match_school(ARGV[0])
+  match(ARGV[0])
 end
