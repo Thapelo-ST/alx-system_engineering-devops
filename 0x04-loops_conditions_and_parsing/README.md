@@ -12,5 +12,5 @@ SSH keys are used for secure authentication between two parties, usually between
 <b>What is the advantage of using #!/usr/bin/env bash over #!/bin/bash</b>
 
 
-The advantage of using #!/usr/bin/env bash is that it allows you to avoid hardcoding the path to the Bash executable. Instead, it searches for the Bash interpreter in the user's environment, which is more flexible and portable.
+The advantage of using #!/usr/bin/env bash is that it allows you to avoid hardcoding the path to the Bash executable. Instead, it searches for the Bash interpreter in the user's environment, which is more flexible and portable and also quicker.
 </prep>
