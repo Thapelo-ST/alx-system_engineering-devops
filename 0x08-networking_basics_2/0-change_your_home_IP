@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# this script changes ip addresses that are specified
+
+docker run -it --rm --name ubuntu-config ubuntu /bin/bash <<EOF
+
+echo "127.0.0.2 localhost" >> /etc/hosts
+echo "8.8.8.8" facebook.com >> /etc/hosts
+
+exit
+
+EOF
