@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# this script prings the network passed
+
+if [ "$#" -ne 1 ]; then
+   echo "Usage: $0 {IP_ADDRESS}"
+else
+	   ping -c 5 "$1"
+fi

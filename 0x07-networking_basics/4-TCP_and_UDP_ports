@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+
+echo "Active Internet connections (only servers)"
+echo "Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name"
+netstat -tuln | awk '/LISTEN/ {
+    cmd = "lsof -i :" $4 " -t"
+    cmd | getline pid
+    close(cmd)
+    cmd = "ps -p " pid " -o comm="
+    cmd | getline pname
+    close(cmd)
+    print $1, $2, $4, $5, $6, pid "/" pname
+}'
