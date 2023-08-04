@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+# prints all active connections and listening connections
 
 echo "Active Internet connections (only servers)"
 echo "Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name"
