@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
 # Set the SSH private key file and server address
-private_key_file="$HOME/.ssh/school"
-server_address="8.8.8.8"
+private_key_file="$HOME/.ssh/id_rsa"
+server_address="54.236.46.23"
 ssh_user="ubuntu"
 
-# Connect to the server using SSH
 ssh -i "$private_key_file" "$ssh_user@$server_address"
