@@ -1,3 +1,5 @@
+# Execution file that kills the process KILLMENOW
+
 exec { 'killmenow_process':
   command     => '/usr/bin/pkill -f killmenow',
   path        => '/usr/bin',
