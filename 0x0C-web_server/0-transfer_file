@@ -1,6 +1,13 @@
-#!usr/bin/env bash
+#!/usr/bin/env bash
 
-if [ "$#" -ne 4]; then
+if [ "$#" -ne 4 ]; then
    echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
    exit 1
 fi
+
+PATH="$1"
+IP="$2"
+USERNAME="$3"
+SSH_KEY_PATH="$4"
+
+scp -o StrictHostKeyCHecking=no -i "$SSH_KEY_PATH" "$PATH" "$USERNAME@$IP:~/"
