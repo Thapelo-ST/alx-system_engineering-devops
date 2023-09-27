@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+sudo apt update
+
+sudo apt install -y nginx
+
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+sudo service nginx start
+
+if sudo netstart -turln | grep -q ":80 "; then
+   echo "its listening"
+else
+   echo "its not listening to port 80"
+   exit 1
+fi
+
+curl -s 127.0.0.1 | grep -q "Hello World!"
+
+echo "Installation successful"
