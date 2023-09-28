@@ -2,9 +2,7 @@
 
 sudo apt update
 
-if ! dpkg -l | grep -q "nginx"; then
-    sudo apt install -y nginx
-fi
+sudo apt install -y nginx
 
 echo 'server {
     listen 80;
@@ -16,10 +14,6 @@ echo 'server {
 }' | sudo tee /etc/nginx/sites-available/redirect
 
 sudo ln -s /etc/nginx/sites-available/redirect /etc/nginx/sites-enabled/
-
-if [ -f /etc/nginx/sites-enabled/default ]; then
-    sudo rm /etc/nginx/sites-enabled/default
-fi
 
 if sudo nginx -t; then
     sudo service nginx reload
