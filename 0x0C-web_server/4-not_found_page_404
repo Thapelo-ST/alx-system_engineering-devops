@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# configure custom error 404 page
+sudo apt update
+
+sudo apt install -y nginx
+
+echo 'server {
+    listen 80;
+    server_name 289867-web-01;
+
+    location /redirect_me {
+        return 301 https://www.tradingview.com/;
+    }
+}' | sudo tee /etc/nginx/sites-available/redirect
+
+# Create the custom 404 HTML page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html > /dev/null
+
+# Modify the Nginx configuration to use the custom 404 page
+sudo sed -i '/listen 80 default_server;/a \\n\terror_page 404 /custom_404.html;' /etc/nginx/sites-available/default
+
+
+if sudo nginx -t; then
+    sudo service nginx reload
+else
+    exit 1
+fi
