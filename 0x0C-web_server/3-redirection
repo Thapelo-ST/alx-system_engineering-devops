@@ -1,20 +1,17 @@
 #!/usr/bin/env bash
 
-# Update the package list to make sure you have the latest information about available packages.
 sudo apt update
 
-# Install Nginx if it's not already installed
 if ! dpkg -l | grep -q "nginx"; then
     sudo apt install -y nginx
 fi
 
-# Create a custom Nginx configuration for the redirect
 echo 'server {
     listen 80;
     server_name 289867-web-01;
 
     location /redirect_me {
-        return 301 https://www.greenlighit.tech/new_page;
+        return 301 https://www.tradingview.com/;
     }
 }' | sudo tee /etc/nginx/sites-available/redirect
 
@@ -25,9 +22,7 @@ if [ -f /etc/nginx/sites-enabled/default ]; then
 fi
 
 if sudo nginx -t; then
-    echo "Success"
     sudo service nginx reload
 else
-    echo "Fail"
     exit 1
 fi
