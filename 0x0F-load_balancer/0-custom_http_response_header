@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# Update the package list to make sure you have the latest information about available packages.
+sudo apt update
+
+# Install Nginx if it's not already installed
+if ! dpkg -l | grep -q "nginx"; then
+    sudo apt install -y nginx
+fi
+
+# Get the server's hostname
+HOSTNAME=$(hostname)
+
+# Create a custom Nginx configuration for the custom header
+echo 'server {
+    listen 80;
+    server_name '"$HOSTNAME"';
+
+    location / {
+        add_header X-Served-By '"$HOSTNAME"';
+        # Additional server configurations go here, if needed.
+    }
+}' | sudo tee /etc/nginx/sites-available/custom_header
+
+# Create a symbolic link to enable the new configuration
+sudo ln -sf /etc/nginx/sites-available/custom_header /etc/nginx/sites-enabled/
+
+# Test Nginx configuration to ensure there are no syntax errors
+if sudo nginx -t; then
+    # Reload Nginx to apply the new configuration
+    sudo service nginx reload
+    echo "Nginx configuration updated with custom response header and reloaded successfully."
+else
+    echo "Nginx configuration test failed. Please check your configuration files."
+    exit 1
+fi

@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+# script that configures NGINX so that http contains a custom header
