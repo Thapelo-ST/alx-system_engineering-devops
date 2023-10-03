@@ -8,7 +8,7 @@ if ! dpkg -l | grep -q "nginx"; then
 fi
 
 HOSTNAME=$(hostname);
-echo 'server {
+echo "server {
     listen 80;
     server_name $HOSTNAME;
 
@@ -17,7 +17,7 @@ echo 'server {
         add_header X-Served-By $HOSTNAME;
         # Additional server configurations go here, if needed.
     }
-}' | sudo tee /etc/nginx/sites-available/custom_header
+}" | sudo tee /etc/nginx/sites-available/custom_header
 
 sudo ln -sf /etc/nginx/sites-available/custom_header /etc/nginx/sites-enabled/
 
