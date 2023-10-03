@@ -1,2 +1,55 @@
 #!/usr/bin/env bash
-# script that configures NGINX so that http contains a custom header
+# Installs HAProxy then configures it to the load balancer
+
+sudo apt update
+
+# Install HAProxy if not installed
+if ! dpkg -l | grep -q "haproxy"; then
+    sudo apt install -y haproxy
+fi
+
+echo "ENABLED=1" >> /etc/default/haproxy
+mv /etc/haproxy/haproxy.cfg{,.original}
+touch /etc/haproxy/haproxy.cfg
+
+printf %s "global
+    log /dev/log local0
+    log /dev/log local1 notice
+    user haproxy
+    group haproxy
+    maxconn 4096
+    daemon
+
+defaults
+    log global
+    mode http
+    option httplog
+    option dontlognull
+    timeout connect 5000
+    timeout client 50000
+    timeout server 50000
+    errorfile 400 /etc/haproxy/errors/400.http
+    errorfile 403 /etc/haproxy/errors/403.http
+    errorfile 408 /etc/haproxy/errors/408.http
+    errorfile 500 /etc/haproxy/errors/400.http
+    errorfile 502 /etc/haproxy/errors/502.http
+    errorfile 503 /etc/haproxy/errors/503.http
+    errorfile 504 /etc/haproxy/errors/504.http
+
+frontend load-balancer
+    bind 0:80
+    default_backend web-servers
+
+backend web-servers
+    timeout client  3000
+    timeout server 30000
+    balance roundrobin
+    server 289867-web-01 34.227.93.64:80 check
+    server 289867-web-02 3.85.54.154:80 check
+" >> /etc/haproxy/haproxy.cfg
+
+# Enable HAProxy so it can be managed
+# sudo update-rc.d haproxy enable
+
+# Start HAProxy and apply the configuration
+sudo service haproxy start
