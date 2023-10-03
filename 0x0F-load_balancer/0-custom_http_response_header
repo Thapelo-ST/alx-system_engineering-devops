@@ -10,7 +10,7 @@ fi
 HOSTNAME=$(hostname);
 echo 'server {
     listen 80;
-    server_name '"$HOSTNAME"';
+    server_name $HOSTNAME;
 
     add_header X-Served-By $HOSTNAME;
     location / {
