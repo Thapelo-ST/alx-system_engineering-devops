@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# configure domain zones
+# Function to display information for a subdomain
+display_info() {
+    domain="$1"
+    subdomain="$2"
+    record_type="$3"
+    destination="$4"
+    echo "The subdomain \
+$subdomain is a $record_type record and points to $destination"
+}
+
+# Check if both domain and subdomain are provided
+if [ $# -eq 2 ]; then
+    domain="$1"
+    subdomain="$2"
+    result=$(dig +short "$subdomain.$domain" | awk '{print $1}')
+    if [ -n "$result" ]; then
+        display_info "$domain" "$subdomain" "A" "$result"
+    else
+        echo "The subdomain $subdomain does not exist for $domain"
+    fi
+else
+    domain="$1"
+    subdomains=("www" "lb-01" "web-01" "web-02")
+
+    for subdomain in "${subdomains[@]}"; do
+        result=$(dig +short "$subdomain.$domain" | awk '{print $1}')
+        if [ -n "$result" ]; then
+            display_info "$domain" "$subdomain" "A" "$result"
+        else
+            echo "The subdomain $subdomain does not exist for $domain"
+        fi
+    done
+fi
