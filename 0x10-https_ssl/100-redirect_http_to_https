@@ -1,0 +1,40 @@
+global
+    log /dev/log local0
+    log /dev/log local1 notice
+    user haproxy
+    group haproxy
+    maxconn 4096
+    daemon
+
+defaults
+    log global
+    mode http
+    option httplog
+    option dontlognull
+    timeout connect 5000
+    timeout client 50000
+    timeout server 50000
+    errorfile 400 /etc/haproxy/errors/400.http
+    errorfile 403 /etc/haproxy/errors/403.http
+    errorfile 408 /etc/haproxy/errors/408.http
+    errorfile 500 /etc/haproxy/errors/400.http
+    errorfile 502 /etc/haproxy/errors/502.http
+    errorfile 503 /etc/haproxy/errors/503.http
+    errorfile 504 /etc/haproxy/errors/504.http
+
+frontend www-http
+    bind    0.0.0.0:80
+    http-request add-header X-Forwarded-Proto http
+    default_backend web-servers
+
+frontend www-https
+    bind    0.0.0.0:443 ssl crt /etc/letsencrypt/live/www.greenlighit.tech/www.greenlighit.tech.pem
+#    bind    0.0.0.0:443 ssl crt /etc/letsencrypt/live/www.greenlighit.tech/fullchain.pem
+    http-request add-header X-Forwarded-Proto https
+    default_backend web-servers
+
+backend web-servers
+    balance roundrobin
+    redirect scheme https if !{ ssl_fc }
+    server 289867-web-01 34.227.93.64:80 check
+    server 289867-web-02 3.85.54.154:80 check
