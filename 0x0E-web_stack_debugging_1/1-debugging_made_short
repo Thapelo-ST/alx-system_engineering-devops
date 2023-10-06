@@ -1,5 +1,5 @@
 #!/bin/env bash
 # Fixes port 80 listening bug
-dpkg -l | grep -q "nginx" && rm -f /etc/nginx/sites-enabled/default
-	&& ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
-    && service nginx restart
+dpkg -l | grep -q "nginx" && rm -f /etc/nginx/sites-enabled/default && \
+    ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/ && \
+    service nginx restart
