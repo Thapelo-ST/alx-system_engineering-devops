@@ -1,5 +1,5 @@
-#!/bin/env bash
-# Fixes port 80 listening bug
-ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
-service nginx start
-kill "$(pgrep 'nginx' | head -1)"
+#!/usr/bin/env bash
+# fixes port 80 listening bug
+rm /etc/nginx/sites-enabled/default
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo service nginx restart
