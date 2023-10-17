@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# enables firewall blocking all incomming traffic unless
+# for forts 22/tcp, 443/tcp and 80/tcp
+
+sudo ufw status
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw status verbose
+sudo ufw allow 22/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 80/tcp
+sudo ufw status verbose
+sudo ufw enable
+sudo ufw status verbose
