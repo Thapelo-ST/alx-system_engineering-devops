@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 # changes user from root to nginx user
-# Install Nginx if it's not already installed
+
 if ! command -v nginx &> /dev/null; then
-    echo "Nginx is not installed. Installing..."
     apt-get update
     apt-get install -y nginx
 fi
 
-# Stop the Nginx service to make configuration changes
+# stop the Nginx service to make configuration changes
 service nginx stop
 
 # Update the Nginx conf to run nginx user & listen on all active IPs on 8080
@@ -41,7 +40,5 @@ http {
 }
 EOF
 
-# Start the Nginx service with the updated configuration
+# start the Nginx service with the updated configuration
 service nginx start
-
-echo "Nginx is now running as the nginx user and listening on port 8080."
