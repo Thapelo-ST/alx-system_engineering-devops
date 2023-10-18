@@ -1,4 +1,4 @@
-#!/usr/bin/env/ bash
+#!/usr/bin/env bash
 # changes user from root to nginx user
 # Install Nginx if it's not already installed
 if ! command -v nginx &> /dev/null; then
