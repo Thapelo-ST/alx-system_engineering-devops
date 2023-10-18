@@ -1,0 +1,47 @@
+#!/usr/bin/env/ bash
+
+# Install Nginx if it's not already installed
+if ! command -v nginx &> /dev/null; then
+    echo "Nginx is not installed. Installing..."
+    apt-get update
+    apt-get install -y nginx
+fi
+
+# Stop the Nginx service to make configuration changes
+service nginx stop
+
+# Update the Nginx conf to run nginx user & listen on all active IPs on 8080
+cat > /etc/nginx/nginx.conf <<EOF
+user nginx;
+worker_processes auto;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    keepalive_timeout 65;
+    types_hash_max_size 2048;
+
+    server {
+        listen *:8080;
+        server_name _;
+
+        location / {
+            root /usr/share/nginx/html;
+            index index.html;
+        }
+    }
+}
+EOF
+
+# Start the Nginx service with the updated configuration
+service nginx start
+
+echo "Nginx is now running as the nginx user and listening on port 8080."
