@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# create a MySQL dump file for backing up databases
+
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 <mysql_password>"
+  exit 1
+fi
+
+mysql_password="$1"
+
+current_date=$(date +'%d-%m-%Y')
+
+dump_file="backup.sql"
+archive_file="$current_date.tar.gz"
+
+if mysqldump -u root -p"$mysql_password" --all-databases > "$dump_file"; then
+  if tar -czvf "$archive_file" "$dump_file"; then
+     rm "$dump_file"
+  fi
+fi
+ 
