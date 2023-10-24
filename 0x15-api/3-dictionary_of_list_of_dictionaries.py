@@ -1,17 +1,18 @@
 #!/usr/bin/python3
 """
-   This module uses a REST API to retrieve information about all employees' TODO
-   list progress and exports it to a JSON file.
+    This module uses a REST API to retrieve
+    information about all employees' TO DO
+    list progress and exports it to a JSON file.
 """
-
-import requests
 import json
+import requests
 
 
 def get_all_employee_todo_progress():
     """
         This module uses a REST API to retrieve information
-        about all employees' TODO list progress and exports it to a JSON file.
+        about all employees' TO DO list progress and
+        exports it to a JSON file.
     """
     base_url = "https://jsonplaceholder.typicode.com"
     users_url = "{}/users".format(base_url)
@@ -43,8 +44,6 @@ def get_all_employee_todo_progress():
         json_filename = "todo_all_employees.json"
         with open(json_filename, 'w') as json_file:
             json.dump(all_employee_data, json_file, indent=4)
-
-        print("Data exported to {}".format(json_filename))
 
     except requests.exceptions.RequestException as e:
         print("Error: {}".format(e))

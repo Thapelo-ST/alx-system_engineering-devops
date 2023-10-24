@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """
-   This module uses a REST API to retrieve information about an employee's
-   TODO list progress and exports it to a JSON file.
+    This module uses a REST API to retrieve
+    information about an employee's
+    to-do list progress and exports it to a JSON file.
 """
 
 import json
@@ -10,7 +11,9 @@ import sys
 
 
 def get_employee_todo_progress(employee_id):
-    """ gets employee todo progress and exports JSON format data"""
+    """
+        gets employee to-do progress and exports JSON format data
+    """
     base_url = "https://jsonplaceholder.typicode.com"
     user_url = "{}/users/{}".format(base_url, employee_id)
     todo_url = "{}/todos?userId={}".format(base_url, employee_id)

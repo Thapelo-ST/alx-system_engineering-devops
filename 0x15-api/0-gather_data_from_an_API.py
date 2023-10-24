@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-   this module using this REST API, for a given employee ID,
-   returns information about his/her TODO list progress.
+    this module using this REST API, for a given employee ID,
+    returns information about his/her to-do list progress.
 """
 import requests
 import sys
@@ -9,7 +9,7 @@ import sys
 
 def get_employee_todo_progress(employee_id):
     """
-       this function is the rest api to gather data
+        this function is the rest api to gather data
     """
     # Define the API URL
     base_url = "https://jsonplaceholder.typicode.com"
@@ -35,7 +35,7 @@ def get_employee_todo_progress(employee_id):
             employee_name, completed_tasks, total_tasks))
         for task in todo_list:
             if task['completed']:
-                print(f"\t{task['title']}")
+                print("\t{}".format(task['title']))
 
     except requests.exceptions.RequestException as e:
         print("Error: {}".format(e))

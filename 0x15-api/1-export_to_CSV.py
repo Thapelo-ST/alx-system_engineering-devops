@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-   This module uses a REST API to retrieve information about an employee's
-   TODO list progress and exports it to a CSV file.
+    This module uses a REST API to retrieve information about an employee's
+    TO DO list progress and exports it to a CSV file.
 """
 import csv
 import requests
@@ -9,7 +9,7 @@ import sys
 
 
 def get_employee_todo_progress(employee_id):
-    """ gets the employee to do progress but modified"""
+    """ gets the employee to do progress but modified """
     base_url = "https://jsonplaceholder.typicode.com"
     user_url = "{}/users/{}".format(base_url, employee_id)
     todo_url = "{}/todos?userId={}".format(base_url, employee_id)
@@ -39,12 +39,13 @@ def get_employee_todo_progress(employee_id):
                                  "TASK_COMPLETED_STATUS", "TASK_TITLE"])
             for task in todo_list:
                 csv_writer.writerow([user_id, username,
-                                     task['completed'], task['title'])
+                                     task['completed'], task['title']])
 
         print("Data exported to {}".format(csv_filename))
 
     except requests.exceptions.RequestException as e:
         print("Error: {}".format(e))
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
