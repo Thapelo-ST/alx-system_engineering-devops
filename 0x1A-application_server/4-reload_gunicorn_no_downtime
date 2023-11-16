@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# end the gunicorn worker processe gracefully, with no downtime
+killall -HUP gunicorn
